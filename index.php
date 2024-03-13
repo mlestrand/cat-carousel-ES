@@ -1,3 +1,11 @@
+<?php 
+    include 'src/functions.php';
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -26,8 +34,12 @@
         <!-- Page content-->
         <div class="container mt-5">
 
-        <?php
-            echo "does this work?";
+        <h1>Cat Carousel</h1>
+        <p>Select a cat breed:</p>
+
+        <?php 
+            $form = getCatBreeds();
+            echo $form; 
         ?>
 
 

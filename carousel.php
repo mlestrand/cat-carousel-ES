@@ -1,3 +1,12 @@
+<?php
+    include 'src/functions.php';
+    include 'index.php'; 
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -27,7 +36,15 @@
         <div class="container mt-5">
 
         
-
+        <?php 
+            // receive cat breed id from index.php
+            $breed = $_GET["breed"];
+            // call cat API to get 10 images
+            // create bootstrap carousel 
+            // static (html) vs dynamic (php) content
+            // cat breed name in h1 element (store session vaiable in index.php?)
+            // echo "hello ".$_SESSION['dayofweek']."<br>";
+        ?>
 
 
 
