@@ -37,14 +37,14 @@
 
         
         <?php 
-            // receive cat breed id from index.php
-            $breed = $_GET["breed"];
-            // call cat API to get 10 images
-            // create bootstrap carousel 
+            $catID = $_GET['breed'];
+            echo getCatImages($catID);
             // static (html) vs dynamic (php) content
             // cat breed name in h1 element (store session vaiable in index.php?)
             // echo "hello ".$_SESSION['dayofweek']."<br>";
         ?>
+
+        <a href="https://webdev2.watzek.cloud/~estrand/cat-carousel-ES/" role="button">See different cat breeds</a>
 
 
 
