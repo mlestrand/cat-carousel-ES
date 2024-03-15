@@ -1,5 +1,5 @@
 <?php 
-include '../config/config.php'; 
+include 'config/config.php'; 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -8,11 +8,11 @@ session_start(); /* this allows you to save data in $_SESSION */
 
 function getCatBreeds(){
 
-    //$key = key;
+    $key = KEY;
 
     $form="<form method='GET' action='carousel.php'>";
 
-    $url = "https://api.thecatapi.com/v1/breeds";
+    $url = "https://api.thecatapi.com/v1/breeds?api_key=".$key;
     $data= json_decode(file_get_contents($url));
     //var_dump($data);
 
@@ -48,7 +48,8 @@ function getCatBreeds(){
 }
 
 function getCatImages($catID){
-    $url = "https://api.thecatapi.com/v1/images/search?breed_ids=".$catID."&limit=10";
+    $key = KEY;
+    $url = "https://api.thecatapi.com/v1/images/search?breed_ids=".$catID."&limit=10&api_key=".$key;
     $data= json_decode(file_get_contents($url));
     $imageOne = $data[0]->url;
     $numImages = count($data);
