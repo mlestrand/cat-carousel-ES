@@ -6,9 +6,9 @@ error_reporting(E_ALL);
 session_start(); /* this allows you to save data in $_SESSION */
 /* https://www.w3schools.com/php/php_sessions.asp */
 
-/* write PHP functions here */
-
 function getCatBreeds(){
+
+    //$key = key;
 
     $form="<form method='GET' action='carousel.php'>";
 
@@ -21,12 +21,19 @@ function getCatBreeds(){
     <div class='col-8'>
     <select class='form-select' name='breed'>";
 
+    $catIds = array();
+    $catNames = array();
 
     for ($i=0;$i<count($data);$i++){
         $id = $data[$i]->id;
-        $name = $data[$i]->name;
+        $catIds[$i] = $id;
+        $name = $data[$i]->name; 
+        $catNames[$i] = $name;
         $form.= "<option value='$id'>$name</option>";
     }
+
+    $_SESSION['ids'] = $catIds;
+    $_SESSION['names'] = $catNames;
 
     $form.="</select>
     </div>
@@ -37,8 +44,6 @@ function getCatBreeds(){
     </div>";
 
     $form.="</form>";
-    // how to get breed name instead of breed id?
-    //$_SESSION = $_GET["breed"];
     return $form; 
 }
 
@@ -47,7 +52,7 @@ function getCatImages($catID){
     $data= json_decode(file_get_contents($url));
     $imageOne = $data[0]->url;
     $numImages = count($data);
-    $carousel = "<div id='carouselExampleIndicators' class='carousel slide' data-bs-ride='carousel'>
+    $carousel = "<div id='carouselExampleIndicators' class='carousel slide' data-bs-ride='carousel' style='width:50%;'>
     <div class='carousel-indicators'>
     <button type='button' data-bs-target='#carouselExampleIndicators' data-bs-slide-to='0' class='active' aria-current='true' aria-label='Slide 1'></button>";
     for ($i=1;$i<$numImages;$i++){
@@ -56,12 +61,12 @@ function getCatImages($catID){
     $carousel.=" </div>
     <div class='carousel-inner'>
     <div class='carousel-item active'>
-    <img src='".$imageOne."' class='d-block w-100' alt='Image One'>
+    <img src='".$imageOne."' class='d-block w-100' alt='Image 1'>
     </div>";
     for($i=1;$i<$numImages;$i++){
         $image = $data[$i]->url;
         $carousel.="<div class='carousel-item'>
-        <img src='".$image."' class='d-block w-100' alt='...'>
+        <img src='".$image."' class='d-block w-100' alt='Image".$i."'>
       </div>";
     }
     $carousel.="</div>
