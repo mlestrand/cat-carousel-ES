@@ -48,28 +48,36 @@ function getCatBreeds(){
 }
 
 function getCatImages($catID){
+
     $key = KEY;
+
     $url = "https://api.thecatapi.com/v1/images/search?breed_ids=".$catID."&limit=10&api_key=".$key;
     $data= json_decode(file_get_contents($url));
+
     $imageOne = $data[0]->url;
     $numImages = count($data);
+
     $carousel = "<div id='carouselExampleIndicators' class='carousel slide' data-bs-ride='carousel' style='width:50%;'>
     <div class='carousel-indicators'>
     <button type='button' data-bs-target='#carouselExampleIndicators' data-bs-slide-to='0' class='active' aria-current='true' aria-label='Slide 1'></button>";
+    
     for ($i=1;$i<$numImages;$i++){
         $carousel.="<button type='button' data-bs-target='#carouselExampleIndicators' data-bs-slide-to='".$i."'aria-label='Slide".$i."'></button>";
     }
+
     $carousel.=" </div>
     <div class='carousel-inner'>
     <div class='carousel-item active'>
     <img src='".$imageOne."' class='d-block w-100' alt='Image 1'>
     </div>";
+
     for($i=1;$i<$numImages;$i++){
         $image = $data[$i]->url;
         $carousel.="<div class='carousel-item'>
         <img src='".$image."' class='d-block w-100' alt='Image".$i."'>
       </div>";
     }
+
     $carousel.="</div>
     <button class='carousel-control-prev' type='button' data-bs-target='#carouselExampleIndicators' data-bs-slide='prev'>
       <span class='carousel-control-prev-icon' aria-hidden='true'></span>
@@ -80,6 +88,7 @@ function getCatImages($catID){
       <span class='visually-hidden'>Next</span>
     </button>
   </div>";
+  
     return $carousel; 
 }
 
